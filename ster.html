@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ستار نت</title>
+    <style>
+        /* إعدادات التصميم الأساسي */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        /* الخلفية المتغيرة بألوان الطيف */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(270deg, #ff7b7b, #ffd27b, #fffb7b, #b6ff7b, #7bffe5, #7bb6ff, #c87bff, #ff7b9e);
+            background-size: 1600% 1600%;
+            animation: rainbowBackground 20s infinite linear;
+            z-index: -1;
+        }
+
+        /* حركة الخلفية بألوان الطيف */
+        @keyframes rainbowBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+            width: 45%;
+        }
+
+        .button.green { background-color: #4caf50; }
+        .button.orange { background-color: #ff9800; }
+        .button.blue { background-color: #2196f3; }
+        .button.red { background-color: #f44336; }
+        .button.yellow { background-color: #ffc107; }
+
+        #content { display: none; padding-top: 20px; }
+
+        #displayArea {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: black;
+            margin-top: 20px;
+        }
+
+        /* الشريط المتحرك في أسفل الصفحة */
+        .marquee {
+            width: 100%;
+            background-color: #222;
+            color: #fff;
+            font-size: 0.8em;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 0;
+            padding: 5px 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* تصميم شعار "بن طاهر" */
+        .ben-tahir-logo {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 0.6em; /* حجم خط صغير جداً */
+            color: #fff;
+            opacity: 0.7; /* شفافية خفيفة */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="appTitle">ستار نت</h1>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <button class="button green" id="btnEnter" onclick="showContent()">دخول</button>
+    </div>
+
+    <div id="content">
+        <div class="button-container">
+            <button class="button blue" onclick="showPackages()">عروض الباقات</button>
+            <button class="button red" onclick="showLimitedOffers()">زيادة بنسبة</button>
+            <button class="button orange" onclick="openWhatsApp()">تواصل معنا على الواتس اب</button>
+            <button class="button yellow" onclick="openBilling()">استعلام عن الرصيد</button>
+        </div>
+        <div class="button-container">
+            <button class="button blue" onclick="measureSpeed()">قياس سرعة الإنترنت</button>
+            <button class="button red" onclick="showStores()">نقاط البيع</button>
+        </div>
+        
+        <div id="displayArea"></div>
+    </div>
+
+    <!-- الشريط المتحرك -->
+    <div class="marquee">
+        <div class="marquee-content">
+            مرحباً بكم في شبكة ستار نت، استخدم الإنترنت في ما يرضي الله.
+        </div>
+    </div>
+
+    <!-- شعار "بن طاهر" في أسفل الصفحة بخط صغير -->
+    <div class="ben-tahir-logo">تصميم بن طاهر</div>
+
+    <script>
+        function showContent() {
+            document.getElementById('content').style.display = 'block';
+            document.querySelector('#btnEnter').style.display = 'none';
+        }
+
+        function hideAllSections() {
+            document.getElementById('displayArea').innerHTML = "";
+        }
+
+        function showPackages() {
+            hideAllSections();
+            document.getElementById('displayArea').innerHTML = "<h3>عروض الباقات</h3><p>200 R - 800M<br>500 R - 2G<br>1000 R - 4G<br>5000 R - 20G</p>";
+        }
+
+        function showLimitedOffers() {
+            hideAllSections();
+            document.getElementById('displayArea').innerHTML = "<h3>زيادة بنسبة</h3><p>عرض العيد - 20% زيادة<br>عرض رمضان - 30% زيادة</p>";
+        }
+
+        function openWhatsApp() {
+            window.location.href = "https://wa.me/780483098";
+        }
+
+        function openBilling() {
+            window.open("http://10.0.0.1", "_blank");
+        }
+
+        function measureSpeed() {
+            hideAllSections();
+            const speedDisplay = document.getElementById('displayArea');
+            speedDisplay.innerHTML = "<h3>قياس سرعة الإنترنت...</h3>";
+
+            const imageUrl = "https://www.gstatic.com/webp/gallery/2.jpg";
+            const img = new Image();
+            const startTime = new Date().getTime();
+
+            img.onload = function() {
+                const endTime = new Date().getTime();
+                const duration = (endTime - startTime) / 1000;
+                const fileSizeInBytes = 117000;
+                const speedMbps = (fileSizeInBytes * 8 / duration) / 1000000;
+
+                speedDisplay.innerHTML = `
+                    <h3>نتيجة قياس سرعة الإنترنت</h3>
+                    <p>السرعة: ${speedMbps.toFixed(2)} Mbps</p>
+                `;
+            }
+
+            img.onerror = function() {
+                speedDisplay.innerHTML = "<h3>حدث خطأ أثناء قياس السرعة</h3><p>يرجى المحاولة لاحقًا.</p>";
+            }
+
+            img.src = imageUrl;
+        }
+
+        function showStores() {
+            hideAllSections();
+            document.getElementById('displayArea').innerHTML = "<h3>نقاط البيع</h3><p>1. سوبر ماركت البسمة<br>2. بقالة الخير</p>";
+        }
+    </script>
+
+</body>
+</html>
